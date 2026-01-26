@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-n3r_ffg%sn_15=fb)%tlg@ut6zt3_o598v8&%#9fgxdw!g&m&x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["role-generator.onrender.com"]
 
 
 # Application definition
