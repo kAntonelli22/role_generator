@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from role_generator import views
 
 urlpatterns = [
-    path("", include("hello.urls")),
+    path('', views.homepage, name='homepage'),
     path('admin/', admin.site.urls)
 ]

@@ -1,0 +1,48 @@
+* {
+    padding: 0;
+    margin: 0;
+    color: antiquewhite;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header, footer {
+    background-color: navy;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    background-color: antiquewhite;
+    display: flex;
+    flex-grow: 6;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    flex-grow: 2
+}
+
+#create, #join {
+    background-color: navy;
+    text-align: center;
+}
+
+#joinflex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#create, #joinflex {
+    min-width: 100px;
+    min-height: 50px;
+}
