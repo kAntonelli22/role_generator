@@ -36,6 +36,9 @@ main {
     align-items: center;
 }
 
+/* homepage 
+*/
+
 #code {
     box-sizing: border-box;
     width: 75%;
@@ -64,6 +67,14 @@ main {
     font-size: 32px;
 }
 
+#create:hover, #join:hover {
+    background-color: rgb(10, 10, 36);
+}
+
+#create:active, #join:active {
+    background-color: rgb(14, 14, 48);
+}
+
 #create, #joinflex {
     min-width: 450px;
     min-height: 200px;
@@ -74,3 +85,15 @@ main {
     justify-content: stretch;
     align-items: stretch;
 }
+
+/* homepage 
+*/
+/* room
+*/
+
+#room-code {
+    color: black
+}
+
+/* room
+*/

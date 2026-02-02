@@ -1,6 +1,3 @@
-
-
-
 let createButton = document.getElementById("create")
 let joinButton = document.getElementById("join")
 let input = document.getElementById("code")
@@ -8,13 +5,41 @@ let input = document.getElementById("code")
 
 createButton.onclick = function(){
     console.log("creating game room...")
+    window.location.href = '/create_room/'
 }
 
 joinButton.onclick = function(){
     console.log("verifying code length...")
     if (input.value.length == 4) {
         console.log("looking for game room...")
+        let valid_code = joinRoom(input.value)
+        if (valid_code) { console.log("code is valid!") } else { console.log("code is invalid!") }
     } else{
         console.log("incomplete code! length is " + input.value.length)
     }
+}
+
+function joinRoom(roomCode) {
+    console.log(csrftoken)
+
+    const formData = new FormData()
+    formData.append('room_code', roomCode)
+
+    fetch('/join_room/', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers:{ 'X-CSRFToken': csrftoken },
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`) }
+        return response.json()
+    })
+    .then(data => {
+        if (data.success) {
+            window.location.href = data.redirect_url
+        } else {
+            console.error(data.error)
+        }
+    })
 }
