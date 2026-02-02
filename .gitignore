@@ -1,3 +1,5 @@
 .vscode/
 .venv/
 staticfiles/
+*.pyc
+db.sqlite3
