@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import sessions
 import random
 import string
 
@@ -9,7 +10,8 @@ import string
 # create room model <i>
 class Room(models.Model):
     code = models.CharField(max_length=4, unique=True, db_index=True)
-    # users = models.ManyToManyField(max_length=255)
+    host = models.CharField(max_length=32)
+    # users = models.ManyToManyField(to=sessions, blank=True)
 
     def __str__(self):
         return self.code
@@ -32,5 +34,7 @@ class Card(models.Model):
     pass
 
 # create user model <i>
-class User(models.Model):
+class RoomParticipant(models.Model):
     name = models.CharField(max_length=255)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="participants")    # change CASCADE if users are saved
+    session = models.CharField(max_length=255)

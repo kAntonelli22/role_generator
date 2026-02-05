@@ -20,10 +20,10 @@ joinButton.onclick = function(){
 }
 
 function joinRoom(roomCode) {
-    console.log(csrftoken)
+    console.log("roomcode: " + roomCode.toUpperCase())
 
     const formData = new FormData()
-    formData.append('room_code', roomCode)
+    formData.append('room_code', roomCode.toUpperCase())
 
     fetch('/join_room/', {
         method: 'POST',

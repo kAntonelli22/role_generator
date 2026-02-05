@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,17 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Role Generator</title>
-    {% load static %}
     <link rel="stylesheet" type='text/css' href="{% static 'role_generator/css/style.css' %}">
   </head>
   <body>
     <header>Role Generator</header>
     <main>
-      <div id="room-code"> {{ room_code }}</div>
-      <div id=""></div>
+      <div id="grid">
+        <div id="room-code"> {{ room_code }}</div>
+        <div class="box" id="box1">
+          <div class="inner-box">
+            {% for participant in participants %}
+            <div class="participant">
+              <div class="participant-name">
+                {{ participant.name }}
+                {% if participant.is_host %}
+                  <span id="host">HOST</span>
+                {% endif %}
+              </div>
+              {% if participant.is_current_user %}
+                <div id="participant-edit">Change Name</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+        <div class="box" id="box2">
+          <div class="inner-box">
+
+          </div>
+        </div>
+      </div>
     </main>
     <footer>made by me</footer>
-    {% load static %}
-    <script src="{% static 'role_generator/js/index.js' %}"></script>
+    <!-- change to use its own js file
+    <script src="{% static 'role_generator/js/index.js' %}"></script> -->
   </body>
 </html>
