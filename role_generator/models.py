@@ -33,8 +33,9 @@ class Room(models.Model):
 class Card(models.Model):
     pass
 
-# create user model <i>
+# create user model <c>
 class RoomParticipant(models.Model):
     name = models.CharField(max_length=255)
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="participants")    # change CASCADE if users are saved
     session = models.CharField(max_length=255)
+    last_seen = models.DateTimeField(auto_now=True)

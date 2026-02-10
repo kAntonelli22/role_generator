@@ -7,6 +7,7 @@ from django.views.decorators.http import require_http_methods
 from .models import Room
 from .models import RoomParticipant
 from django.shortcuts import redirect, get_object_or_404
+import datetime
 
 def homepage(request):
     return render(request, 'role_generator/homepage.html')
@@ -14,10 +15,18 @@ def homepage(request):
 def create_room(request):
     room = Room.create_room()
 
+    # host = get_object_or_404(RoomParticipant, session=request.session.session_key)
+    # if not host:
+    host = RoomParticipant.objects.create(
+            name="Host",
+            room=room,
+            session=request.session.session_key
+        )
+
     if not request.session.session_key:
         request.session.create()
 
-    room.host = request.session.session_key
+    room.host = host.session
     room.save()
 
     return redirect('room', room_code=room.code)
@@ -55,13 +64,11 @@ def room(request, room_code):
 
     participants_data = []
     for p in room.participants.all():
-        print(p.name)
         participants_data.append({
             'name': p.name,
             'is_host': p.session == room.host,
             'is_current_user': p.session == request.session.session_key
         })
-        print("participant: ", p.name, "\tis host? ", p.session == room.host, "\tis current user? ", p.session == request.session.session_key)
 
     context = {
         'room': room,
@@ -69,3 +76,23 @@ def room(request, room_code):
         'participants': participants_data
     }
     return render(request, 'role_generator/room.html', context)
+
+
+def update_user(request, room_code):
+    print("AJAX Polling recieved")
+    room = get_object_or_404(Room, code=room_code)
+
+    # get user from session id
+    user = get_object_or_404(RoomParticipant, session=request.session.session_key, room=room)
+    # set user last seen to current time
+    user.last_seen = datetime.datetime.now()
+
+    participants_data = []
+    for p in room.participants.all():
+        participants_data.append({
+            'name': p.name,
+            'is_host': p.session == room.host,
+            'is_current_user': p.session == request.session.session_key
+        })
+
+    return JsonResponse({'participants': participants_data})

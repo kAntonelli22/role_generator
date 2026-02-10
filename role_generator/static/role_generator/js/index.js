@@ -25,7 +25,9 @@ function joinRoom(roomCode) {
     const formData = new FormData()
     formData.append('room_code', roomCode.toUpperCase())
 
-    fetch('/join_room/', {
+    const url = '/join_room/'
+
+    fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
         headers:{ 'X-CSRFToken': csrftoken },
