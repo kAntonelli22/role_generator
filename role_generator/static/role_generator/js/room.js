@@ -22,7 +22,7 @@ function update_participants(participant_data) {
     for (let participant of participant_data) {
         console.log("\tname: " + participant.name)
         let hostHTML = participant.is_host ? '<span id="host">HOST</span>' : ''
-        let editHTML = participant.is_user ? '<div id="participant-edit">Change Name</div>' : ''
+        let editHTML = participant.is_current_user ? '<div id="participant-edit">Change Name</div>' : ''
         let participantHTML = `
         <div class=participant>
             <div class=participant-name>

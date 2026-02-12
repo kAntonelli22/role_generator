@@ -7,7 +7,10 @@ from django.views.decorators.http import require_http_methods
 from .models import Room
 from .models import RoomParticipant
 from django.shortcuts import redirect, get_object_or_404
+import random
 import datetime
+from django.utils import timezone
+from datetime import timedelta
 
 def homepage(request):
     return render(request, 'role_generator/homepage.html')
@@ -15,8 +18,6 @@ def homepage(request):
 def create_room(request):
     room = Room.create_room()
 
-    # host = get_object_or_404(RoomParticipant, session=request.session.session_key)
-    # if not host:
     host = RoomParticipant.objects.create(
             name="Host",
             room=room,
@@ -79,13 +80,16 @@ def room(request, room_code):
 
 
 def update_user(request, room_code):
-    print("AJAX Polling recieved")
     room = get_object_or_404(Room, code=room_code)
-
-    # get user from session id
     user = get_object_or_404(RoomParticipant, session=request.session.session_key, room=room)
-    # set user last seen to current time
-    user.last_seen = datetime.datetime.now()
+    user.last_seen = timezone.now()
+    user.save()
+
+    if random.random() < 0.1:
+        print("Random user cleanup called")
+        cutoff = timezone.now() - timedelta(minutes=1)
+        RoomParticipant.objects.filter(last_seen__lt=cutoff).delete()
+        Room.objects.filter(participants__isnull=True).delete()
 
     participants_data = []
     for p in room.participants.all():
