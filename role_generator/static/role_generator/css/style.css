@@ -20,6 +20,7 @@ header, footer {
 }
 
 header {
+    color: rgb(236, 236, 236);
     font-size: 48px;
 }
 
@@ -39,68 +40,48 @@ main {
 /* homepage 
 */
 
-#code {
-    box-sizing: border-box;
-    width: 75%;
-    border: none;
-    color: rgb(6, 6, 24);
-    font-size: 32px;
-    text-align: center;
-    text-transform: uppercase;
-    border: solid rgb(6, 6, 24);
-    border-width: 10px 0 10px 10px;
-    border-radius: 25px 0 0 25px;
-}
-
-#code::placeholder {
-    color: rgb(55, 55, 105)
-}
-
-#join {
-    position: relative;
-    width: 25%;
-    border: solid rgb(6, 6, 24);
-    border-width: 10px 10px 10px 0;
-    border-radius: 0 25px 25px 0;
-}
-
 #create, #join {
-    background-color: rgb(46, 46, 99);
-    text-align: center;
+    box-sizing: border-box;
+    width: 300px;
+    height: 100px;
+    border-radius: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     font-size: 32px;
-    cursor: pointer;
     user-select: none;
-    -webkit-user-select: none
+    -webkit-user-select: none;
 }
 
 #create {
-    border: 10px solid rgb(6, 6, 24);
-    border-radius: 25px;
+    color: rgb(236, 236, 236);
+    background-color: rgb(134, 72, 184);
+    cursor: pointer;
 }
 
-#create:hover, #join:hover {
-    background-color: rgb(10, 10, 36);
+#join {
+    color: rgb(46, 46, 99);
+    background-color: rgb(236, 236, 236);
+    border: 0.4rem solid;
+    border-color: rgb(204, 204, 204);
+    text-transform: uppercase;
+    cursor: text;
 }
 
-#create:active, #join:active {
-    background-color: rgb(14, 14, 48);
+#join::placeholder {
+    color: rgb(55, 55, 105)
 }
 
-#create, #joinflex {
-    min-width: 450px;
-    min-height: 200px;
-    /* border-radius: 25px; */
-    /* outline: 10px solid rgb(6, 6, 24) */
+#create:hover { background-color: rgb(130, 74, 178); }
+#create:active, #create:focus { background-color: rgb(160, 80, 232); }
+
+#join:hover { background-color: rgb(222, 222, 222); }
+#join:active, #join:focus {
+    background-color: rgb(192, 164, 216);
+    border-color: rgb(192, 164, 216);
 }
 
-#joinflex {
-    display: flex;
-    justify-content: stretch;
-    align-items: stretch;
-}
 
 /* homepage 
 */

@@ -1,6 +1,5 @@
 let createButton = document.getElementById("create")
-let joinButton = document.getElementById("join")
-let input = document.getElementById("code")
+let joinInput = document.getElementById("join")
 
 
 createButton.onclick = function(){
@@ -8,16 +7,16 @@ createButton.onclick = function(){
     window.location.href = '/create_room/'
 }
 
-joinButton.onclick = function(){
-    console.log("verifying code length...")
-    if (input.value.length == 4) {
+joinInput.addEventListener("input", function(){
+    console.log("checking join code length...")
+    if (joinInput.value.length == 4) {
         console.log("looking for game room...")
-        let valid_code = joinRoom(input.value)
+        let valid_code = joinRoom(joinInput.value)
         if (valid_code) { console.log("code is valid!") } else { console.log("code is invalid!") }
     } else{
-        console.log("incomplete code! length is " + input.value.length)
+        console.log(joinInput.value.length, " is too short to be a code")
     }
-}
+})
 
 function joinRoom(roomCode) {
     console.log("roomcode: " + roomCode.toUpperCase())
